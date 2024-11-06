@@ -1,0 +1,12 @@
+.source-control {
+    border: none;
+    width: 100%
+}
+
+.source-control button {
+    width: 100%
+}
+
+.source-control svg {
+    margin-right: 5px;
+}

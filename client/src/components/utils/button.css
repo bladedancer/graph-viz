@@ -1,0 +1,48 @@
+.button {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid var(--cy-controls-border-color);
+    border-radius: 4px;
+    color: var(--cy-controls-color);
+}
+
+
+.button button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    line-height: var(--cy-controls-size);
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-color: var(--cy-controls-background-color);
+    clip: rect(0, 0, 0, 0);
+    align-items: center;
+}
+
+.button button.primary {
+    display: flex;
+    flex: 1 1 auto;
+    padding-left: 5px;
+}
+
+.button button.primary:hover {
+    background-color: var(--cy-controls-background-color-hover);
+}
+
+.button .primary.active {
+    font-weight: bold;
+}
+
+.button button.alt {
+    display: flex;
+    flex: 0 1 auto;
+    width: var(--cy-controls-size);
+    height: var(--cy-controls-size);
+    border-left:  2px solid var(--cy-controls-border-color);
+    padding-left: 6px;
+}
+
+.button button.alt:hover {
+    background-color: var(--cy-controls-background-color-hover);
+}

@@ -1,0 +1,15 @@
+/**
+ * Export
+ */
+.export-control {
+    border: none;
+    width: 100%
+}
+
+.export-control button {
+    width: 100%
+}
+
+.export-control svg {
+    margin-right: 5px;
+}

@@ -1,0 +1,29 @@
+# This won't work right - the task is in a container and cli auth is trying to do a url open.
+# Using gp preview as the browser....but platform CSP doesn't allow it to be embedded...so you
+# have to open it external....the open external does a localhost redirect.
+# So you have to open a bash and manually exect the responses.
+
+tasks:
+  - init: |
+      npm install
+      gp sync-done installation
+    env:
+      DEBUG: '*'
+      BROWSER: gp preview --external
+  - init: gp sync-await installation
+    command: npm run start
+    env:
+      DEBUG: '*'
+      BROWSER: gp preview --external
+  - init: gp sync-await installation
+    command: gp ports await 8080 && gp preview --external $(gp url 8080)
+
+ports:
+  - port: 3000
+    name: OauthCallback
+    onOpen: ignore
+    visibility: public
+  - port: 8080
+    name: WebViz
+    onOpen: open-browser
+    visibility: public

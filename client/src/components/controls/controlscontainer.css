@@ -1,0 +1,71 @@
+/**
+   * Cy controls wrapper
+   */
+.react-cy-controls {
+    position: absolute;
+    z-index: var(--cy-controls-zindex);
+    border: 2px solid var(--cy-controls-border-color);
+    border-radius: 4px;
+    color: var(--cy-controls-color);
+    background-color: var(--cy-controls-background-color);
+}
+
+.react-cy-controls.bottom-right {
+    bottom: var(--cy-controls-margin);
+    right: var(--cy-controls-margin);
+}
+
+.react-cy-controls.bottom-left {
+    bottom: var(--cy-controls-margin);
+    left: var(--cy-controls-margin);
+}
+
+.react-cy-controls.top-right {
+    top: var(--cy-controls-margin);
+    right: var(--cy-controls-margin);
+}
+
+.react-cy-controls.top-left {
+    top: var(--cy-controls-margin);
+    left: var(--cy-controls-margin);
+}
+
+.react-cy-controls:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.react-cy-controls:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+/**
+   * Cy control button
+   */
+.react-cy-control {
+    width: var(--cy-controls-size);
+    height: var(--cy-controls-size);
+    line-height: var(--cy-controls-size);
+    background-color: var(--cy-controls-background-color);
+    border-bottom: 1px solid var(--cy-controls-border-color);
+}
+
+.react-cy-control>button {
+    display: block;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: var(--cy-controls-size);
+    height: var(--cy-controls-size);
+    line-height: var(--cy-controls-size);
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-color: var(--cy-controls-background-color);
+    clip: rect(0, 0, 0, 0);
+}
+
+.react-cy-control>button:hover {
+    background-color: var(--cy-controls-background-color-hover);
+}

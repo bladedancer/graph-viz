@@ -1,0 +1,37 @@
+/**
+ * Filter
+ */
+.filter-control {
+    border: none;
+    margin: 2vh 2px 2px 2px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.connected-toggle {
+    margin: 2px 0;
+}
+
+
+/**
+ * Node Filter
+ */
+.node-filter-control {
+    display: flex;
+    flex-direction: row;
+}
+
+.node-filter-control label {
+    text-align: center;
+}
+
+.node-filter-control input {
+    border: 0;
+    padding: 0 0 0 5px;
+}
+
+.edge-filter-control {
+    display: flex;
+    flex-direction: column;
+}

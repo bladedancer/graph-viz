@@ -1,0 +1,19 @@
+name: ghpages
+
+on: 
+  push:
+    branches: 'master'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          # checkout full tree
+          fetch-depth: 0
+      - name: Push to GH pages
+        run: |
+          git push origin `git subtree split --prefix client/dist master`:gh-pages --force
