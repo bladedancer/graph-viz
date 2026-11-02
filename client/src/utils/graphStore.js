@@ -127,6 +127,25 @@ export class GraphStore {
         return tasks;
     }
 
+    /**
+     * The given nodes plus every loaded node reachable from them by following relationships: forwards ('out', what
+     * they point at) or backwards ('in', what points at them).
+     */
+    reachable(ids, direction = 'out') {
+        const edges = direction === 'in' ? this.inn : this.out;
+        const seen = new Set([...ids].filter((id) => this.byId.has(id)));
+        const queue = [...seen];
+        while (queue.length) {
+            for (const next of edges.get(queue.pop())) {
+                if (!seen.has(next)) {
+                    seen.add(next);
+                    queue.push(next);
+                }
+            }
+        }
+        return [...seen];
+    }
+
     /** The node itself plus everything it links to or from. */
     neighbours(id) {
         return new Set([id, ...(this.out.get(id) ?? []), ...(this.inn.get(id) ?? [])]);
@@ -202,10 +221,11 @@ export class GraphStore {
 
 /**
  * Which resources match the filter box. Returns null when nothing is being filtered, otherwise
- * { matches, included }: `included` adds the neighbours of each match when `connected` is on
- * (outbound = what a match links to, inbound = what links to it).
+ * { matches, included, hide }: `included` adds everything connected to a match when `connected` is on, however many
+ * hops away (outbound = what a match leads to, inbound = what leads to it; both = the two together, not everything
+ * those in turn connect to); `hide` asks for everything else to be left out of the drawing rather than dimmed.
  */
-export function applyFilter(store, { text = '', connected = false, direction = 'both' } = {}) {
+export function applyFilter(store, { text = '', connected = false, direction = 'both', hide = false } = {}) {
     const q = text.trim().toLowerCase();
     if (!q) return null;
     const matches = new Set();
@@ -214,10 +234,8 @@ export function applyFilter(store, { text = '', connected = false, direction = '
     }
     const included = new Set(matches);
     if (connected) {
-        for (const id of matches) {
-            if (direction !== 'inbound') store.out.get(id).forEach((t) => included.add(t));
-            if (direction !== 'outbound') store.inn.get(id).forEach((s) => included.add(s));
-        }
+        if (direction !== 'inbound') store.reachable(matches, 'out').forEach((id) => included.add(id));
+        if (direction !== 'outbound') store.reachable(matches, 'in').forEach((id) => included.add(id));
     }
-    return { matches, included };
+    return { matches, included, hide };
 }

@@ -32,6 +32,12 @@ body {
     white-space: nowrap;
 }
 
+/* The design system's hover colors (white for secondary, teal for text buttons) outrank its disabled color, which
+   leaves a disabled secondary button white on white under the pointer. Disabled buttons don't react to hover. */
+.ads-btn[disabled]:hover {
+    color: var(--ads-secondary-500);
+}
+
 :focus-visible {
     outline: 2px solid var(--ads-util-focus);
     outline-offset: 2px;

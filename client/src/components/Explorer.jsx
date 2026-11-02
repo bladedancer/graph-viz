@@ -41,7 +41,7 @@ export default function Explorer({ session, onSession, onSignOut, onExpired }) {
     const [notice, setNotice] = useState(null); // { tone, title, text }
     const [modeBusy, setModeBusy] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
-    const [filter, setFilter] = useState({ text: '', connected: false, direction: 'both' });
+    const [filter, setFilter] = useState({ text: '', connected: false, direction: 'both', hide: false });
     const [physics, setPhysics] = useState({ linkDistance: 60, repulsion: 300, gravity: 30, paused: false });
     const [colorBy, setColorBy] = useState('group');
     const [engine, setEngine] = useState('running');
@@ -156,14 +156,16 @@ export default function Explorer({ session, onSession, onSignOut, onExpired }) {
 
     // Loads relationships, one request at a time (later requests wait their turn). `ids` are the nodes to expand, or
     // null for every node; `follow` is 'one' (just those relationships) or 'all' (and onward from whatever is found).
+    // The server never re-fetches resources the graph already has, so it can't follow relationships onward through
+    // them: for 'all', start from everything already reachable, and go again while new resources lead to more.
     const runExpansions = useCallback(async () => {
         if (expanding.current) return;
         expanding.current = true;
         try {
             for (let job; (job = expandQueue.current.shift());) {
-                const tasks = store.expansionTasks(job.ids);
+                const tasks = store.expansionTasks(job.follow === 'all' && job.ids ? store.reachable(job.ids) : job.ids);
                 if (tasks.length === 0) {
-                    setNotice({ tone: 'info', text: `${job.label} has no related resources left to load.` });
+                    if (!job.again) setNotice({ tone: 'info', text: `${job.label} has no related resources left to load.` });
                     continue;
                 }
                 if (store.nodes.length >= maxResources) {
@@ -209,7 +211,9 @@ export default function Explorer({ session, onSession, onSignOut, onExpired }) {
                             }`,
                         });
                     } else if (store.nodes.length === before) {
-                        setNotice({ tone: 'info', text: `Nothing new to load for ${job.label}.` });
+                        if (!job.again) setNotice({ tone: 'info', text: `Nothing new to load for ${job.label}.` });
+                    } else if (job.follow === 'all') {
+                        expandQueue.current.unshift({ ...job, again: true });
                     }
                 } catch (err) {
                     publish();

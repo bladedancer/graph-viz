@@ -29,6 +29,7 @@ export default function FilterSection({ filter, onChange, result }) {
                 onChange={(connected) => onChange({ ...filter, connected })}
                 label="Include connected resources"
             />
+            <Switch checked={filter.hide} onChange={(hide) => onChange({ ...filter, hide })} label="Hide unselected" />
             {filter.connected && (
                 <div className="segmented" role="group" aria-label="Direction">
                     {DIRECTIONS.map(([value, label]) => (
@@ -48,9 +49,9 @@ export default function FilterSection({ filter, onChange, result }) {
                 <p className="hint" aria-live="polite">
                     {result.matches.size === 0
                         ? 'Nothing matches.'
-                        : filter.connected
-                          ? `Showing ${result.matches.size.toLocaleString()} ${result.matches.size === 1 ? 'match' : 'matches'} and the resources they connect to. Everything else is dimmed.`
-                          : `Showing ${result.matches.size.toLocaleString()} ${result.matches.size === 1 ? 'match' : 'matches'}. Everything else is dimmed.`}
+                        : `Showing ${result.matches.size.toLocaleString()} ${result.matches.size === 1 ? 'match' : 'matches'}${
+                              filter.connected ? ' and the resources they connect to' : ''
+                          }. Everything else is ${filter.hide ? 'hidden' : 'dimmed'}.`}
                 </p>
             )}
         </div>

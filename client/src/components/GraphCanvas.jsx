@@ -75,6 +75,11 @@ export default function GraphCanvas({
             canvas: cssVar('--ads-util-emphasis-soft'),
         });
 
+        // Filtered out: dimmed, or not drawn at all when the filter hides them.
+        const isHidden = (node) => {
+            const f = latest.current.filterSet;
+            return Boolean(f?.hide && !f.included.has(node.id));
+        };
         const alphaOf = (node) => {
             const v = latest.current;
             if (v.filterSet && !v.filterSet.included.has(node.id)) return 0.12;
@@ -161,14 +166,17 @@ export default function GraphCanvas({
 
         // No arrowheads on huge graphs (they are invisible at that scale and expensive), except on a selection's links.
         const arrowLength = (l) => (isHot(l) ? 5 : latest.current.huge ? 0 : 3.5);
+        const linkVisible = (l) => !isHidden(l.source) && !isHidden(l.target);
 
-        helpers.current = { drawNode, linkColor, isHot, arrowLength };
+        helpers.current = { drawNode, linkColor, isHot, arrowLength, isHidden, linkVisible };
 
         let lastClick = { id: null, at: 0 };
         const g = new ForceGraph(el)
             .nodeId('id')
             .nodeCanvasObjectMode(() => 'replace')
             .nodeCanvasObject(drawNode)
+            .nodeVisibility((node) => !isHidden(node))
+            .linkVisibility(linkVisible)
             .nodePointerAreaPaint((node, color, ctx) => {
                 ctx.fillStyle = color;
                 ctx.beginPath();
@@ -263,8 +271,10 @@ export default function GraphCanvas({
     useEffect(() => {
         const g = graph.current;
         if (!g) return;
-        const { drawNode, linkColor, isHot, arrowLength } = helpers.current;
+        const { drawNode, linkColor, isHot, arrowLength, isHidden, linkVisible } = helpers.current;
         g.nodeCanvasObject((n, ctx, scale) => drawNode(n, ctx, scale))
+            .nodeVisibility((n) => !isHidden(n))
+            .linkVisibility((l) => linkVisible(l))
             .linkColor((l) => linkColor(l))
             .linkDirectionalArrowColor((l) => linkColor(l))
             .linkWidth((l) => (isHot(l) ? 2 : 1))

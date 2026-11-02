@@ -135,6 +135,24 @@ describe('what is left to load', () => {
         assert.equal(store.unloadedCount('project:p1'), 3);
     });
 
+    it('finds the loaded resources reachable by following relationships, so their missing ones can be loaded too', () => {
+        const store = new GraphStore();
+        store.add({
+            nodes: [
+                node('project', 'p1', 'P', { rels: { apiproxies: ['apiproxy:a1'] } }),
+                node('apiproxy', 'a1', 'A', { rels: { endpoints: ['endpoint:e1'], policies: ['policy:x1'] } }),
+                node('endpoint', 'e1', 'E', { rels: { project: ['project:p1'] } }),
+                node('team', 't1', 'T', { rels: { projects: ['project:p1'] } }),
+            ],
+        });
+        assert.deepEqual(store.reachable(['project:p1']).sort(), ['apiproxy:a1', 'endpoint:e1', 'project:p1']);
+        assert.deepEqual(store.expansionTasks(['project:p1']), [], "p1's own relationships are all loaded");
+        assert.deepEqual(
+            store.expansionTasks(store.reachable(['project:p1'])).map((t) => t.rel),
+            ['policies']
+        );
+    });
+
     it('keeps ids that contain colons intact', () => {
         const store = new GraphStore();
         store.add({ nodes: [node('project', 'p1', 'P', { rels: { versions: ['version:941cd08e:V1'] } })] });
@@ -238,5 +256,22 @@ describe('applyFilter', () => {
         assert.deepEqual(included('inbound'), ['activation:act1', 'apiproxy:a1', 'project:p1:V1']);
         assert.deepEqual(included('both'), ['activation:act1', 'apiproxy:a1', 'endpoint:e1', 'project:p1:V1']);
         assert.deepEqual([...applyFilter(store, { text, connected: false }).included], ['apiproxy:a1']);
+    });
+
+    it('includes connected resources however many hops away, without crossing over between directions', () => {
+        const store = sample();
+        const included = (text, direction) => [...applyFilter(store, { text, connected: true, direction }).included].sort();
+        // Nightly -> apiproxy a1 -> endpoint e1
+        assert.deepEqual(included('nightly', 'outbound'), ['activation:act1', 'apiproxy:a1', 'application:app1', 'endpoint:e1']);
+        // prod <- a1 <- project and activation
+        assert.deepEqual(included('prod', 'inbound'), ['activation:act1', 'apiproxy:a1', 'endpoint:e1', 'project:p1:V1']);
+        // The project's descendants (and its ancestors, none): not the activation that also points at one of them.
+        assert.deepEqual(included('project', 'both'), ['apiproxy:a1', 'endpoint:e1', 'project:p1:V1']);
+        assert.deepEqual(included('Core', 'both'), ['team:t1']);
+    });
+
+    it('passes on whether to hide what it leaves out', () => {
+        assert.equal(applyFilter(sample(), { text: 'v2' }).hide, false);
+        assert.equal(applyFilter(sample(), { text: 'v2', hide: true }).hide, true);
     });
 });
