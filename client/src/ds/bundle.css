@@ -1,0 +1,103 @@
+/* Hand-written approximations of Amplify Studio's NG-Zorro + ADS look, built only from --ads-* tokens.
+   Sources: tokens/colors/variables-colors.scss (button/form colors), tokens/ads-components/*.scss (form, tabs, tooltip, collapse).
+   These are NOT the Angular components - they are static CSS for mockups. */
+
+.ads-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ads-padding-default);
+  height: 32px;
+  padding: 4px var(--ads-padding-medium);
+  font: inherit;
+  line-height: 1.5;
+  border: 1px solid var(--ads-primary-500);
+  border-radius: var(--ads-radius);
+  background: var(--ads-primary-500);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.ads-btn:hover { background: rgb(0 101 128 / 0.8); border-color: rgb(0 101 128 / 0.8); }
+.ads-btn:active { background: #215ea5; border-color: #215ea5; }
+.ads-btn:focus-visible { outline: 2px solid var(--ads-util-focus); outline-offset: 2px; }
+.ads-btn[disabled] { background: rgb(74 79 84 / 0.1); border-color: rgb(74 79 84 / 0.1); color: var(--ads-secondary-500); cursor: not-allowed; }
+
+.ads-btn-secondary { background: transparent; color: var(--ads-primary-500); }
+.ads-btn-secondary:hover { color: #fff; }
+.ads-btn-secondary:active { color: #fff; }
+.ads-btn-secondary[disabled] { background: transparent; }
+
+.ads-btn-text { background: transparent; border-color: transparent; color: var(--ads-primary-500); }
+.ads-btn-text:hover { background: transparent; border-color: transparent; color: rgb(0 101 128 / 0.8); }
+.ads-btn-text:active { background: transparent; border-color: transparent; color: #215ea5; }
+.ads-btn-text[disabled] { background: transparent; border-color: transparent; }
+
+.ads-btn-danger { background: var(--ads-danger-500); border-color: var(--ads-danger-500); }
+.ads-btn-danger:hover { background: var(--ads-danger-600); border-color: var(--ads-danger-600); }
+
+.ads-form-item { display: flex; flex-direction: column; gap: var(--ads-padding-small); max-width: 320px; }
+.ads-form-label { font-weight: var(--ads-font-weight-bold); color: var(--ads-text-primary); }
+.ads-input {
+  box-sizing: border-box;
+  height: 32px;
+  padding: 4px 11px;
+  font: inherit;
+  color: var(--ads-secondary-500);
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: var(--ads-radius);
+}
+.ads-input:hover { border-color: var(--ads-primary-500); }
+.ads-input:focus { outline: none; border-color: var(--ads-primary-500); box-shadow: 0 0 0 2px rgb(0 101 128 / 0.15); }
+.ads-input[disabled] { background: rgb(74 79 84 / 0.1); border-color: rgb(74 79 84 / 0.1); cursor: not-allowed; }
+.ads-input-error { border-color: var(--ads-danger-500); }
+.ads-form-error { color: var(--ads-text-danger); font-size: var(--ads-font-size-sm); }
+
+.ads-alert { display: flex; gap: var(--ads-padding-default); padding: var(--ads-padding-default) var(--ads-padding-medium); border: 1px solid; border-radius: var(--ads-radius); }
+.ads-alert-success { background: var(--ads-success-50); border-color: var(--ads-success-300); }
+.ads-alert-success .ads-alert-title { color: var(--ads-success-600); }
+.ads-alert-error { background: var(--ads-danger-50); border-color: var(--ads-danger-200); }
+.ads-alert-error .ads-alert-title { color: var(--ads-danger-600); }
+.ads-alert-warning { background: var(--ads-warning-50); border-color: var(--ads-warning-200); }
+.ads-alert-warning .ads-alert-title { color: var(--ads-warning-600); }
+.ads-alert-title { font-weight: var(--ads-font-weight-bold); }
+
+.ads-tabs { display: flex; gap: var(--ads-padding-large); border-bottom: 1px solid var(--ads-gray-200); }
+.ads-tab { position: relative; padding: 4px 0 var(--ads-padding-default); color: var(--ads-primary-500); cursor: pointer; }
+.ads-tab-active { color: var(--ads-text-primary); font-weight: var(--ads-font-weight-medium); }
+.ads-tab-active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 4px; background: var(--ads-util-black); }
+.ads-tab-disabled { color: rgb(0 0 0 / 0.25); cursor: not-allowed; }
+
+.ads-tooltip {
+  display: inline-block;
+  max-width: 240px;
+  padding: var(--ads-padding-default) var(--ads-padding-medium);
+  font-size: var(--ads-font-size-sm);
+  line-height: 18px;
+  color: var(--ads-text-primary);
+  background: #fff;
+  border: 1px solid var(--ads-gray-100);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgb(0 30 38 / 0.14);
+}
+
+.ads-collapse-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-weight: 900;
+  color: var(--ads-text-primary);
+  border-bottom: 1px solid rgb(200 201 199 / 0.5);
+}
+.ads-collapse-arrow { padding: 7px; font-size: 10px; color: var(--ads-primary-500); }
+.ads-collapse-content { margin: 0 var(--ads-padding-large) 1rem; }
+
+body {
+  margin: 0;
+  font-family: var(--ads-font-family);
+  font-size: var(--ads-font-size-base);
+  font-weight: var(--ads-font-weight-normal);
+  color: var(--ads-text-primary);
+  background: var(--ads-util-white);
+}
