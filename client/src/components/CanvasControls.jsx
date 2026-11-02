@@ -1,6 +1,6 @@
 import Icon from './Icon.jsx';
 
-export function Toolbar({ onExport, exportDisabled, exporting, onLoadRelationships, canLoadRelationships, unloaded, maxResources }) {
+export function Toolbar({ onExport, exportDisabled, exporting, onLoadRelationships, canLoadRelationships, unloaded }) {
     return (
         <div className="toolbar">
             <button
@@ -10,7 +10,7 @@ export function Toolbar({ onExport, exportDisabled, exporting, onLoadRelationshi
                 disabled={!canLoadRelationships}
                 title={
                     unloaded > 0
-                        ? `Load the resources that the ${unloaded.toLocaleString()} unloaded relationships point to, and follow on from them, up to ${maxResources.toLocaleString()} resources in all`
+                        ? `Load the resources that the ${unloaded.toLocaleString()} unloaded relationships point to, and follow on from them`
                         : 'Everything the loaded resources relate to is already loaded'
                 }
             >

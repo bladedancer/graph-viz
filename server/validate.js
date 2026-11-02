@@ -30,19 +30,16 @@ const isId = (value) => typeof value === 'string' && value.length > 0 && value.l
 
 /**
  * Validates the body of POST /api/expand:
- *   { tasks: [{ path, rel, total, targets: [{ type, id }] }], known: ['type:id', ...], follow: 'one' | 'all', maxResources }
- * Returns it normalised, or throws a 400 HttpError.
+ *   { tasks: [{ path, rel, total, targets: [{ type, id }] }], known: ['type:id', ...], follow: 'one' | 'all' }
+ * Returns it normalised, or throws a 400 HttpError. There is deliberately no resource limit here: the user's Max resources
+ * applies to loading the graph, not to expanding it, so `known` (however large the graph has grown) is only bounded for
+ * sanity.
  */
-export function parseExpand(body, { maxResourcesCap }) {
+export function parseExpand(body) {
     if (!body || typeof body !== 'object') throw bad('The request body must be a JSON object.');
     if (body.follow !== 'one' && body.follow !== 'all') throw bad("follow must be 'one' or 'all'.");
-    const maxResources = body.maxResources;
-    if (!Number.isInteger(maxResources) || maxResources < 1 || maxResources > maxResourcesCap) {
-        throw bad(`Max resources must be a whole number between 1 and ${maxResourcesCap}.`);
-    }
 
-    if (!Array.isArray(body.known) || body.known.length > maxResourcesCap)
-        throw bad('known must be a list of the resources already loaded.');
+    if (!Array.isArray(body.known) || body.known.length > 1_000_000) throw bad('known must be a list of the resources already loaded.');
     if (!body.known.every(isId)) throw bad('known contains an invalid id.');
 
     if (!Array.isArray(body.tasks) || body.tasks.length === 0 || body.tasks.length > 100_000) {
@@ -63,5 +60,5 @@ export function parseExpand(body, { maxResourcesCap }) {
         return { path: task.path, rel: task.rel, total: task.total, targets: task.targets.map((t) => ({ type: t.type, id: t.id })) };
     });
 
-    return { tasks, known: body.known, follow: body.follow, maxResources };
+    return { tasks, known: body.known, follow: body.follow };
 }

@@ -37,8 +37,9 @@ resource types and select **Load graph**.
   disabled.
 - **Load graph** reads the selected root types, up to **Per type** each (up to 10,000), and shows them as nodes. It does not
   load relationships; the status line says how many related resources are still not loaded.
-- **Load relationships** (toolbar, or under Source) loads what the loaded resources relate to and follows on from there, up to
-  **Max resources** (up to 100,000) in total. Related resources are loaded in bulk, a page of up to 100 per request.
+- **Load relationships** (toolbar, or under Source) loads what the loaded resources relate to and follows on from there. **Per type**
+  and **Max resources** (up to 100,000) limit Load graph only; relationship loads (including double-click) ignore them, however large
+  the graph already is. Related resources are loaded in bulk, a page of up to 100 per request.
 - **Double-click** a resource to load its relationships one level deep. **Shift + double-click** loads everything reachable from
   it. Its details panel has the same actions.
 - Click a resource for its attributes, relationships and raw data. Drag to pin it; right-click it (or **Unpin** in its details)
@@ -66,7 +67,7 @@ Environment variables (or a `.env` file; see `.env.example`):
 | `SESSION_TTL_MINUTES`                                  | `480`       | Idle time before a session ends.                                                                                |
 | `UPSTREAM_TIMEOUT_SECONDS`                             | `30`        | Per-request timeout to the tenant.                                                                              |
 | `CRAWL_CONCURRENCY`                                    | `12`        | Parallel requests to the tenant while crawling.                                                                 |
-| `MAX_RESOURCES_CAP`                                    | `100000`    | Upper bound users can request for _Max resources_.                                                              |
+| `MAX_RESOURCES_CAP`                                    | `100000`    | Upper bound users can request for _Max resources_, and on the new resources one relationship load may add.      |
 | `LOGIN_ATTEMPTS_PER_MINUTE`                            | `10`        | Sign-in attempts allowed per client per minute.                                                                 |
 | `TRUST_PROXY`                                          | `false`     | Set to `true` behind a TLS-terminating reverse proxy so the session cookie is marked `Secure`.                  |
 | `ALLOWED_ORIGINS`                                      | _(none)_    | Extra browser origins allowed to call the API (same-origin always is).                                          |
@@ -103,7 +104,7 @@ All under `/api`, JSON, same-origin, session cookie.
 | `GET /roots/counts` | Record count per root type, or why it can't be listed.                                                                                                    |
 | `PUT /mode`         | `{ mode }` (`DESIGN`, `CHECK` or `LIVE`) -> the `Env-Mode` every later request uses.                                                                      |
 | `POST /graph`       | `{ roots, perRoot, maxResources }` -> reads the root types (no relationships). Streams NDJSON: `progress`, `graph` batches of `{ nodes }`, then `result`. |
-| `POST /expand`      | `{ tasks, known, follow, maxResources }` -> loads relationships of resources the client already has (`follow`: `one` or `all`). Same stream.              |
+| `POST /expand`      | `{ tasks, known, follow }` -> loads relationships of resources the client already has (`follow`: `one` or `all`). Same stream.                            |
 
 ### Root resources
 

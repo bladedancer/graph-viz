@@ -43,7 +43,8 @@ async function runPool(items, concurrency, worker) {
  *    `maxResources` resources are known. `follow: 'one'` loads just the tasks' resources and stops there, and
  *    `follow: 'none'` doesn't load any relationships.
  *
- * `known` lists ids the caller already has; they count towards `maxResources` and are never fetched again.
+ * `known` lists ids the caller already has; they count towards `maxResources` and are never fetched again (so a caller
+ * that doesn't want its existing graph to use up the budget passes `known.length + <new resources allowed>`).
  *
  * Resources reachable only through a relationship are fetched through their parent's path
  * (`/project/<id>/apiproxies/<id>`), because not every type has a collection of its own. Where a parent has several

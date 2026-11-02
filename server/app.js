@@ -243,7 +243,10 @@ export function createApp({ config, sessions = new SessionStore({ ttlMs: config.
     // Loads relationships of resources the client already has. The client sends the relationship groups still to load
     // and the ids it already holds; `follow: 'one'` loads just those, `'all'` keeps following from whatever is found.
     app.post('/api/expand', requireSession, async (req, res) => {
-        const { tasks, known, follow, maxResources } = parseExpand(req.body, { maxResourcesCap: config.maxResourcesCap });
+        const { tasks, known, follow } = parseExpand(req.body);
+        // The user's Max resources doesn't apply to expansion, however large the graph already is. The only bound is a
+        // backstop on how many *new* resources one request may add (known ids count against the crawler's budget).
+        const maxResources = known.length + config.maxResourcesCap;
         await streamCrawl(req, res, `expand(${follow}) ${tasks.length} groups`, { tasks, known, follow, maxResources });
     });
 

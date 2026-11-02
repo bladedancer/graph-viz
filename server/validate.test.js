@@ -3,8 +3,8 @@ import { describe, it } from 'node:test';
 import { isValidPath, parseExpand } from './validate.js';
 
 const task = (over = {}) => ({ path: '/project/p1', rel: 'apiproxies', total: 2, targets: [{ type: 'apiproxy', id: 'a1' }], ...over });
-const body = (over = {}) => ({ follow: 'one', maxResources: 100, known: ['project:p1'], tasks: [task()], ...over });
-const parse = (b) => parseExpand(b, { maxResourcesCap: 1000 });
+const body = (over = {}) => ({ follow: 'one', known: ['project:p1'], tasks: [task()], ...over });
+const parse = (b) => parseExpand(b);
 
 describe('isValidPath', () => {
     it('accepts the paths the crawler builds', () => {
@@ -41,20 +41,12 @@ describe('isValidPath', () => {
 describe('parseExpand', () => {
     it('accepts a well-formed request and returns it normalised', () => {
         const parsed = parse(body({ extra: 'ignored' }));
-        assert.deepEqual(Object.keys(parsed).sort(), ['follow', 'known', 'maxResources', 'tasks']);
+        assert.deepEqual(Object.keys(parsed).sort(), ['follow', 'known', 'tasks']);
         assert.deepEqual(parsed.tasks, [task()]);
     });
 
-    it('rejects an unknown follow mode, bad limits and a missing body', () => {
-        for (const b of [
-            null,
-            'x',
-            body({ follow: 'none' }),
-            body({ follow: undefined }),
-            body({ maxResources: 0 }),
-            body({ maxResources: 1001 }),
-            body({ maxResources: 1.5 }),
-        ]) {
+    it('rejects an unknown follow mode and a missing body', () => {
+        for (const b of [null, 'x', body({ follow: 'none' }), body({ follow: undefined })]) {
             assert.throws(() => parse(b), { status: 400, code: 'invalid_request' });
         }
     });
@@ -87,7 +79,7 @@ describe('parseExpand', () => {
         }
     });
 
-    it('refuses more known ids than the largest graph it will build', () => {
-        assert.throws(() => parse(body({ known: Array.from({ length: 1001 }, (_, i) => `t:${i}`) })), { status: 400 });
+    it('refuses an absurd number of known ids', () => {
+        assert.throws(() => parse(body({ known: Array.from({ length: 1_000_001 }, (_, i) => `t:${i}`) })), { status: 400 });
     });
 });

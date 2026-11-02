@@ -168,22 +168,13 @@ export default function Explorer({ session, onSession, onSignOut, onExpired }) {
                     if (!job.again) setNotice({ tone: 'info', text: `${job.label} has no related resources left to load.` });
                     continue;
                 }
-                if (store.nodes.length >= maxResources) {
-                    expandQueue.current = [];
-                    setNotice({
-                        tone: 'warning',
-                        title: `Already at ${maxResources.toLocaleString()} resources`,
-                        text: 'Raise Max resources under Source to load more.',
-                    });
-                    break;
-                }
                 const ctrl = (expandAbort.current = new AbortController());
                 const before = store.nodes.length;
                 setNotice(null);
                 setExpansion({ label: job.label, loaded: 0, requests: 0 });
                 try {
                     const summary = await api.expand(
-                        { tasks, known: store.nodes.map((n) => n.id), follow: job.follow, maxResources },
+                        { tasks, known: store.nodes.map((n) => n.id), follow: job.follow },
                         {
                             signal: ctrl.signal,
                             onProgress: (p) => setExpansion((e) => e && { ...e, requests: p.requests }),
@@ -198,8 +189,8 @@ export default function Explorer({ session, onSession, onSignOut, onExpired }) {
                     if (summary.truncated) {
                         setNotice({
                             tone: 'warning',
-                            title: `Stopped at ${maxResources.toLocaleString()} resources`,
-                            text: 'There is more to load. Raise Max resources under Source.',
+                            title: 'Stopped at the server limit',
+                            text: 'There is more to load. Load relationships again to continue.',
                         });
                     } else if (summary.warnings.length) {
                         const first = summary.warnings[0];
@@ -228,7 +219,7 @@ export default function Explorer({ session, onSession, onSignOut, onExpired }) {
             expanding.current = false;
             setExpansion(null);
         }
-    }, [store, maxResources, guard, publish, schedulePublish]);
+    }, [store, guard, publish, schedulePublish]);
 
     const loadRelationships = useCallback(
         (ids, { all, label }) => {
@@ -416,7 +407,6 @@ export default function Explorer({ session, onSession, onSignOut, onExpired }) {
                     onLoadRelationships={() => loadRelationships(null, { all: true, label: 'all resources' })}
                     canLoadRelationships={canLoadRelationships}
                     unloaded={unloaded}
-                    maxResources={maxResources}
                 />
                 <ZoomControls
                     disabled={!hasGraph}

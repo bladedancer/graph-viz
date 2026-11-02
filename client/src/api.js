@@ -76,7 +76,7 @@ export const api = {
     loadGraph: (params, handlers) => stream('/api/graph', params, handlers),
 
     /**
-     * Loads relationships. `params`: { tasks, known, follow: 'one' | 'all', maxResources } where `tasks` come from
+     * Loads relationships. `params`: { tasks, known, follow: 'one' | 'all' } where `tasks` come from
      * GraphStore.expansionTasks() and `known` is every id already in the graph.
      */
     expand: (params, handlers) => stream('/api/expand', params, handlers),

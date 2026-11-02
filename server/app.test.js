@@ -313,7 +313,7 @@ describe('API', () => {
                 body: JSON.stringify(body),
             });
         const proxies = { path: '/project/p1', rel: 'apiproxies', total: 1, targets: [{ type: 'apiproxy', id: 'a1' }] };
-        const request = (over = {}) => ({ follow: 'one', maxResources: 50, known: ['project:p1'], tasks: [proxies], ...over });
+        const request = (over = {}) => ({ follow: 'one', known: ['project:p1'], tasks: [proxies], ...over });
         const nodesOf = (messages) => messages.filter((m) => m.type === 'graph').flatMap((m) => m.nodes.map((n) => n.id));
 
         it('loads just the relationships it is asked for (follow: one)', async () => {
@@ -335,6 +335,15 @@ describe('API', () => {
             assert.deepEqual(nodesOf(messages), ['apiproxy:a1']);
         });
 
+        it('is not limited by how large the graph already is', async () => {
+            const { cookie } = await signIn();
+            const known = ['project:p1', ...Array.from({ length: 6000 }, (_, i) => `filler:${i}`)]; // more than maxResourcesCap
+            const messages = await readStream(await expand(cookie, request({ known })));
+            assert.deepEqual(nodesOf(messages), ['apiproxy:a1']);
+            assert.equal(messages.at(-1).type, 'result');
+            assert.notEqual(messages.at(-1).truncated, true);
+        });
+
         it('refuses malformed requests without touching the tenant', async () => {
             const { cookie } = await signIn();
             const before = tenant.calls.config.length;
@@ -344,7 +353,6 @@ describe('API', () => {
                 request({ tasks: [] }),
                 request({ tasks: [{ ...proxies, path: '/project/../admin' }] }),
                 request({ tasks: [{ ...proxies, path: 'https://evil.example/x/y' }] }),
-                request({ maxResources: 999_999 }),
             ]) {
                 const res = await expand(cookie, body);
                 assert.equal(res.status, 400, JSON.stringify(body).slice(0, 80));

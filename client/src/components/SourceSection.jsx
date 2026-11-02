@@ -44,8 +44,9 @@ export default function SourceSection({
                 <p className="hint">Very large graphs take a while to load, and are drawn in a simplified form until you zoom in.</p>
             )}
             <p className="hint">
-                Load graph reads the selected types. Load relationships then brings in what they relate to, up to Max resources. You can
-                also double-click a resource to load its relationships, or shift + double-click to load everything reachable from it.
+                Load graph reads the selected types. Max resources and Per type limit this load only. Load relationships then brings in what
+                they relate to, with no limit. You can also double-click a resource to load its relationships, or shift + double-click to
+                load everything reachable from it.
             </p>
 
             {loading ? (
@@ -90,7 +91,7 @@ export default function SourceSection({
                         className="ads-btn ads-btn-secondary"
                         disabled={!canLoadRelationships}
                         onClick={onLoadRelationships}
-                        title="Load what the loaded resources relate to, up to Max resources"
+                        title="Load what the loaded resources relate to, whatever the size of the graph"
                     >
                         Load relationships
                     </button>
@@ -109,7 +110,7 @@ export default function SourceSection({
                 <div className="ads-alert ads-alert-warning">
                     <div>
                         <div className="ads-alert-title">Stopped at {maxResources.toLocaleString()} resources</div>
-                        There are more. Raise Max resources to see them.
+                        There are more. Raise Max resources and load again, or use Load relationships.
                     </div>
                 </div>
             )}
