@@ -55,6 +55,8 @@ export default function DetailsPanel({ node, store, legend, palette, pinned, bus
     const inVia = new Map(inbound.map((id) => [id, via(store.byId.get(id), node)]));
 
     const unloaded = store.unloadedCount(node.id);
+    // "Load all" follows on from the neighbours too, so it has work to do whenever anything reachable is unloaded.
+    const unloadedReachable = store.unloadedCount(node.id, { transitive: true });
     const attributes = Object.entries(node.attributes ?? {});
     const lists = (
         <div className="details-related">
@@ -96,7 +98,7 @@ export default function DetailsPanel({ node, store, legend, palette, pinned, bus
                 <button
                     type="button"
                     className="ads-btn ads-btn-text"
-                    disabled={busy || unloaded === 0}
+                    disabled={busy || unloadedReachable === 0}
                     onClick={() => onLoadRelationships(true)}
                     title="Load everything reachable from this resource (or shift + double-click it)"
                 >
@@ -112,7 +114,7 @@ export default function DetailsPanel({ node, store, legend, palette, pinned, bus
                         Unpin
                     </button>
                 )}
-                {unloaded === 0 && <span className="hint">All related resources are loaded.</span>}
+                {unloadedReachable === 0 && <span className="hint">All related resources are loaded.</span>}
             </div>
             <div className="details-tabs">
                 <div className="ads-tabs" role="tablist" aria-label="Resource details">

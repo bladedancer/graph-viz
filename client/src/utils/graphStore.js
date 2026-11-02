@@ -100,11 +100,16 @@ export class GraphStore {
         return this.unloaded.size;
     }
 
-    /** How many resources this node relates to that aren't loaded yet. */
-    unloadedCount(id) {
+    /**
+     * How many resources this node relates to that aren't loaded yet. With `transitive`, the count covers everything
+     * reachable from it (what "Load all" would load from), not just the node's own relationships.
+     */
+    unloadedCount(id, { transitive = false } = {}) {
         let count = 0;
-        for (const targets of Object.values(this.byId.get(id)?.relationships ?? {})) {
-            for (const target of targets) if (!this.byId.has(target)) count++;
+        for (const from of transitive ? this.reachable([id]) : [id]) {
+            for (const targets of Object.values(this.byId.get(from)?.relationships ?? {})) {
+                for (const target of targets) if (!this.byId.has(target)) count++;
+            }
         }
         return count;
     }
