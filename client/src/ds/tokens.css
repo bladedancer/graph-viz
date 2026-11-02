@@ -1,0 +1,172 @@
+/* Amplify Fusion — generated from tokens.json */
+:root, [data-theme="light"] {
+  --ads-primary-50: #dff1f2; /* Primary (brand) scale: tints 50-400, shades 600-900. Step 50. */
+  --ads-primary-100: #72adb3; /* Primary (brand) scale: tints 50-400, shades 600-900. Step 100. */
+  --ads-primary-200: #509ca6; /* Primary (brand) scale: tints 50-400, shades 600-900. Step 200. */
+  --ads-primary-300: #318999; /* Primary (brand) scale: tints 50-400, shades 600-900. Step 300. */
+  --ads-primary-400: #16778c; /* Primary (brand) scale: tints 50-400, shades 600-900. Step 400. */
+  --ads-primary-500: #006580; /* Brand colour: links, primary button fill and border, outlined and text button labels, inactive tab text, collapse arrow. 6.5:1 on ads-util-white. */
+  --ads-primary-600: #004359; /* Primary (brand) scale: tints 50-400, shades 600-900. Step 600. */
+  --ads-primary-700: #002533; /* Primary (brand) scale: tints 50-400, shades 600-900. Step 700. */
+  --ads-primary-800: #00121a; /* Primary (brand) scale: tints 50-400, shades 600-900. Step 800. */
+  --ads-primary-900: #00090d; /* Primary (brand) scale: tints 50-400, shades 600-900. Step 900. */
+  --ads-secondary-50: #dae2e6; /* Secondary scale. Step 50. */
+  --ads-secondary-100: #bcc6cc; /* Secondary scale. Step 100. */
+  --ads-secondary-200: #a6adb2; /* Secondary scale. Step 200. */
+  --ads-secondary-300: #909599; /* Secondary scale. Step 300. */
+  --ads-secondary-400: #787c80; /* Secondary scale. Step 400. */
+  --ads-secondary-500: #4a4f54; /* Disabled button text and input text. */
+  --ads-secondary-600: #242b33; /* Secondary scale. Step 600. */
+  --ads-secondary-700: #131c26; /* Secondary scale. Step 700. */
+  --ads-secondary-800: #07101a; /* Secondary scale. Step 800. */
+  --ads-secondary-900: #00060d; /* Secondary scale. Step 900. */
+  --ads-tertiary-50: #f2dae0; /* Tertiary scale; no ads-* class uses it. Step 50. */
+  --ads-tertiary-100: #e6c1cd; /* Tertiary scale; no ads-* class uses it. Step 100. */
+  --ads-tertiary-200: #d9adbc; /* Tertiary scale; no ads-* class uses it. Step 200. */
+  --ads-tertiary-300: #c78fa5; /* Tertiary scale; no ads-* class uses it. Step 300. */
+  --ads-tertiary-400: #ab6d87; /* Tertiary scale; no ads-* class uses it. Step 400. */
+  --ads-tertiary-500: #9d4b70; /* Tertiary scale; no ads-* class uses it. Step 500. */
+  --ads-tertiary-600: #783455; /* Tertiary scale; no ads-* class uses it. Step 600. */
+  --ads-tertiary-700: #662144; /* Tertiary scale; no ads-* class uses it. Step 700. */
+  --ads-tertiary-800: #3d0f29; /* Tertiary scale; no ads-* class uses it. Step 800. */
+  --ads-tertiary-900: #29001b; /* Tertiary scale; no ads-* class uses it. Step 900. */
+  --ads-success-50: #cef2e1; /* Success alert background. */
+  --ads-success-100: #8febc1; /* Success scale. Step 100. */
+  --ads-success-200: #6cc4a0; /* Success scale. Step 200. */
+  --ads-success-300: #4d9e7f; /* Success alert border. */
+  --ads-success-400: #30916f; /* Success scale. Step 400. */
+  --ads-success-500: #178462; /* Success scale. Step 500. */
+  --ads-success-600: #0b5e47; /* Success alert title on success-50 (6.4:1). */
+  --ads-success-700: #04382b; /* Success scale. Step 700. */
+  --ads-success-800: #00261e; /* Success scale. Step 800. */
+  --ads-success-900: #000d0a; /* Success scale. Step 900. */
+  --ads-warning-50: #fff9e6; /* Warning alert background. */
+  --ads-warning-100: #ffe7a3; /* Warning scale. Step 100. */
+  --ads-warning-200: #f7d177; /* Warning alert border. */
+  --ads-warning-300: #ebb54b; /* Warning scale. Step 300. */
+  --ads-warning-400: #de9a23; /* Warning scale. Step 400. */
+  --ads-warning-500: #d17f00; /* Warning scale. Step 500. */
+  --ads-warning-600: #9d4e00; /* Warning alert title on warning-50 (5.7:1). */
+  --ads-warning-700: #854700; /* Warning scale. Step 700. */
+  --ads-warning-800: #5e2f00; /* Warning scale. Step 800. */
+  --ads-warning-900: #381a00; /* Warning scale. Step 900. */
+  --ads-danger-50: #fff1f0; /* Error alert background. */
+  --ads-danger-100: #ffd5d1; /* Danger scale. Step 100. */
+  --ads-danger-200: #f7a7a3; /* Error alert border. */
+  --ads-danger-300: #eb7775; /* Danger scale. Step 300. */
+  --ads-danger-400: #de4b4e; /* Danger scale. Step 400. */
+  --ads-danger-500: #d22630; /* Danger button fill and border, error input border. White text on it is 5.2:1. */
+  --ads-danger-600: #ab1623; /* Danger button hover; error alert title on danger-50 (6.7:1). */
+  --ads-danger-700: #850b19; /* Danger scale. Step 700. */
+  --ads-danger-800: #5e0311; /* Danger scale. Step 800. */
+  --ads-danger-900: #38010b; /* Danger scale. Step 900. */
+  --ads-gray-50: #fbfcfa; /* Neutral gray scale for surfaces and borders. Step 50. */
+  --ads-gray-100: #f4f4f4; /* Tooltip border. */
+  --ads-gray-200: #e9e9e9; /* Hairline under the tab row. */
+  --ads-gray-300: #dedfdd; /* Neutral gray scale for surfaces and borders. Step 300. */
+  --ads-gray-400: #d3d4d2; /* Neutral gray scale for surfaces and borders. Step 400. */
+  --ads-gray-500: #c8c9c7; /* Neutral gray scale for surfaces and borders. Step 500. */
+  --ads-gray-600: #646564; /* Neutral gray scale for surfaces and borders. Step 600. */
+  --ads-gray-700: #3c3c3c; /* Neutral gray scale for surfaces and borders. Step 700. */
+  --ads-gray-800: #282828; /* Neutral gray scale for surfaces and borders. Step 800. */
+  --ads-gray-900: #1a1a1a; /* Neutral gray scale for surfaces and borders. Step 900. */
+  --ads-text-primary: #001e26; /* Body copy and headings on ads-util-white (17.0:1). */
+  --ads-text-secondary: #3c3c3c; /* Secondary copy on ads-util-white (10.8:1). */
+  --ads-text-tertiary: #646564; /* Section labels and quiet copy on ads-util-white (5.8:1). */
+  --ads-text-disabled: #c8c9c7; /* Disabled text on ads-util-white. 1.6:1, below the 4.5:1 floor; the source value is kept. */
+  --ads-text-inverse: #fdfdfd; /* Text on ads-primary-500 (6.5:1) and on other dark fills. */
+  --ads-text-link: #004359; /* Links on ads-util-white (10.6:1). */
+  --ads-text-link-hover: #00121a; /* Link hover on ads-util-white (18.7:1). */
+  --ads-text-success: #0b5e47; /* Success text on ads-util-white (7.6:1). */
+  --ads-text-warning: #9d4e00; /* Warning text on ads-util-white (5.9:1). */
+  --ads-text-danger: #ab1623; /* Danger and validation text on ads-util-white (7.2:1); form error messages. */
+  --ads-util-black: #000c0f; /* Active tab ink bar. */
+  --ads-util-white: #fdfdfd; /* Page background (body) and the ground the text colours are set on. */
+  --ads-util-emphasis-soft: #f6f9f9; /* Neutral emphasis surface, softer step. */
+  --ads-util-emphasis: #edf3f3; /* Neutral emphasis surface. */
+  --ads-util-focus: #378ef0; /* Focus ring, drawn 2px solid on ads-util-white (3.3:1, above the 3:1 floor). */
+  --ads-util-focus-fill: #bfd9fa; /* Fill that goes with the focus ring. */
+}
+:root {
+  --ads-padding-small: 4px; /* Gap between a form label and its control. */
+  --ads-padding-default: 8px; /* Gap inside buttons and alerts; vertical padding of alerts. */
+  --ads-padding-medium: 16px; /* Horizontal padding of buttons and alerts; the gap between stacked form fields. */
+  --ads-padding-large: 24px; /* Gap between tabs; indent of collapse content. */
+  --ads-margin-small: 4px; /* Margin step matching padding-small; no ads-* class uses it. */
+  --ads-margin-default: 8px; /* Margin step matching padding-default; no ads-* class uses it. */
+  --ads-margin-medium: 16px; /* Margin step matching padding-medium; no ads-* class uses it. */
+  --ads-margin-large: 24px; /* Margin step matching padding-large; no ads-* class uses it. */
+  --ads-radius: 5px; /* Default radius: buttons, inputs, alerts. */
+  --ads-radius-sm: 3px; /* Small radius; no ads-* class uses it. */
+  --ads-radius-circular: 50%; /* Circles; no ads-* class uses it. */
+  --ads-font-family: Roboto, sans-serif; /* Font stack set on body by styles.css. */
+  --ads-font-size-xs: 10px; /* Smallest text. */
+  --ads-font-size-sm: 12px; /* Form error messages, tooltip text, section labels in specimens. */
+  --ads-font-size-base: 14px; /* Body default (set on body by styles.css). */
+  --ads-font-size-md: 16px; /* Medium text. */
+  --ads-font-size-lg: 18px; /* Large text. */
+  --ads-font-size-xl: 24px; /* Largest text. */
+  --ads-font-weight-normal: 400; /* Body text. */
+  --ads-font-weight-medium: 500; /* Active tab label, section labels in specimens. */
+  --ads-font-weight-bold: 700; /* Form labels, alert titles. */
+  --font-sans: Roboto, sans-serif;
+}
+.size-xs {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+}
+.size-sm {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+}
+.size-base {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+}
+.size-md {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+}
+.size-lg {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 400;
+}
+.size-xl {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 400;
+}
+.weight-normal {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+}
+.weight-medium {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+}
+.weight-bold {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/roboto-latin-ext.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/roboto-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

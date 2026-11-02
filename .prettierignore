@@ -1,0 +1,7 @@
+client/dist
+client/src/ds
+node_modules
+package-lock.json
+server/root-resources.json
+.playwright-mcp
+LICENSE.md

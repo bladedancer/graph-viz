@@ -1,0 +1,205 @@
+[
+    {
+        "name": "apiproxy",
+        "friendlyName": "API",
+        "description": "API Management APIs"
+    },
+    {
+        "name": "activation",
+        "friendlyName": "API Activation",
+        "description": "API Management APIs"
+    },
+    {
+        "name": "apidesign",
+        "friendlyName": "API Design",
+        "description": "API Design Management APIs"
+    },
+    {
+        "name": "override"
+    },
+    {
+        "name": "apikeyauthrule",
+        "friendlyName": "API Key Auth Rule",
+        "description": "API Key Auth Rule Management APIs"
+    },
+    {
+        "name": "apioperationv7policies",
+        "friendlyName": "API Operation V7 Policies",
+        "description": "API Operation V7 Policies"
+    },
+    {
+        "name": "apiservicev7policies",
+        "friendlyName": "API Service V7 Policies",
+        "description": "API Service V7 Policies"
+    },
+    {
+        "name": "application",
+        "friendlyName": "Application",
+        "description": "Application Management APIs"
+    },
+    {
+        "name": "authrule",
+        "friendlyName": "Auth Rule",
+        "description": "Auth Rule Management APIs"
+    },
+    {
+        "name": "basicauthrule",
+        "friendlyName": "Basic Auth Rule",
+        "description": "Basic Auth Rule Management APIs"
+    },
+    {
+        "name": "corsrule",
+        "friendlyName": "CORS Rule",
+        "description": "CORS Governance Rule APIs"
+    },
+    {
+        "name": "sso-default-team-roles",
+        "friendlyName": "Default SSO Team Roles information",
+        "description": "Default SSO Team Roles information"
+    },
+    {
+        "name": "governancerule",
+        "friendlyName": "Governance Rule",
+        "description": "Governance Rule APIs"
+    },
+    {
+        "name": "hsm",
+        "friendlyName": "HSM Connection",
+        "description": "HSM Connection"
+    },
+    {
+        "name": "idp",
+        "friendlyName": "Identity Provider",
+        "description": "Identity Provider APIs"
+    },
+    {
+        "name": "mp-dataplane",
+        "friendlyName": "Marketplace Managed Dataplanes",
+        "description": "Marketplace Dataplane Management APIs"
+    },
+    {
+        "name": "mp-service-account",
+        "friendlyName": "Marketplace Service Account",
+        "description": "Marketplace Service Account Management APIs"
+    },
+    {
+        "name": "oauthjwtrule",
+        "friendlyName": "OAuth 2.0 - JWT Rule",
+        "description": "OAuth 2.0 JWT Auth Rule Management APIs"
+    },
+    {
+        "name": "oauthopaquerule",
+        "friendlyName": "OAuth 2.0 - Opaque Rule",
+        "description": "OAuth 2.0 - Opaque Auth Rule Management APIs"
+    },
+    {
+        "name": "oauthrule",
+        "friendlyName": "OAuth Rule",
+        "description": "OAuth Rule Management APIs"
+    },
+    {
+        "name": "onpremdataplane",
+        "friendlyName": "On Prem Dataplane",
+        "description": "Dataplane Management APIs"
+    },
+    {
+        "name": "policy",
+        "friendlyName": "Policy",
+        "description": "Policy Management APIs"
+    },
+    {
+        "name": "project",
+        "friendlyName": "Project",
+        "description": "Project Management APIs"
+    },
+    {
+        "name": "securityprofile",
+        "friendlyName": "Security Profile",
+        "description": "Security Profile Management APIs"
+    },
+    {
+        "name": "transportsecurity",
+        "friendlyName": "Transport Security",
+        "description": "Transport Security"
+    },
+    {
+        "name": "errorhandlerpolicy"
+    },
+    {
+        "name": "responsehandlerpolicy"
+    },
+    {
+        "name": "authruleoverride"
+    },
+    {
+        "name": "corsruleoverride"
+    },
+    {
+        "name": "transportsecurityoverride"
+    },
+    {
+        "name": "quota",
+        "friendlyName": "Quota",
+        "description": "Quota"
+    },
+    {
+        "name": "sso",
+        "friendlyName": "Single Sign On",
+        "description": "Single Sign On Management APIs"
+    },
+    {
+        "name": "truststore",
+        "friendlyName": "Trust Store",
+        "description": "Trust Store"
+    },
+    {
+        "name": "trustStoreDataplaneEntry",
+        "friendlyName": "Trust Store Dataplane Entry",
+        "description": "Per-data-plane sync state for a trust store"
+    },
+    {
+        "name": "v7dataplanesettings",
+        "friendlyName": "V7 Dataplane Settings",
+        "description": "V7 Dataplane Settings API"
+    },
+    {
+        "name": "v7policy",
+        "friendlyName": "V7 Policy",
+        "description": "V7 Policy API"
+    },
+    {
+        "name": "awscloudhsm"
+    },
+    {
+        "name": "lunahsm"
+    },
+    {
+        "name": "mode"
+    },
+    {
+        "name": "role"
+    },
+    {
+        "name": "sso-saml",
+        "friendlyName": "Single Sign On - SAML",
+        "description": "SAML Single Sign On Management APIs"
+    },
+    {
+        "name": "sso-dynamic-role-rule",
+        "friendlyName": "SSO Dynamic Role Rule",
+        "description": "Maps a SAML attribute value to a Fusion org-level role for dynamic assignment at SSO login"
+    },
+    {
+        "name": "sso-dynamic-team-role-rule",
+        "friendlyName": "SSO Dynamic Team Role Rule",
+        "description": "Maps a SAML attribute value to a Fusion role within a specific team for dynamic assignment at SSO login"
+    },
+    {
+        "name": "sso-dynamic-team-rule",
+        "friendlyName": "SSO Dynamic Team Rule",
+        "description": "Maps a SAML attribute value to a Fusion team for dynamic assignment at SSO login"
+    },
+    {
+        "name": "team"
+    }
+]
