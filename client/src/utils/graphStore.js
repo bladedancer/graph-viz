@@ -5,7 +5,7 @@
 // soon as both of its ends are in the graph. A relationship whose target hasn't been loaded yet is remembered in
 // `unloaded`, which is also what tells us what is still left to load.
 
-export const PALETTE_SLOTS = 8; // distinct colors before everything else shares "other"
+export const PALETTE_SLOTS = 23; // distinct colors before everything else shares "other" (--gv-cat-1..N in app.css)
 
 const OWN_GROUP_TYPES = new Set(['application', 'idp', 'onpremdataplane']);
 

@@ -5,6 +5,31 @@
     --panel-shadow: 0 4px 16px rgb(0 30 38 / 0.12);
     --header-height: 56px;
     --right-offset: 16px;
+    /* Categorical colors for the legend, in the order groups claim them (biggest first). The design system has too few
+       distinct hues for this many groups, so the first six reuse its tokens and the rest are spaced around the wheel. */
+    --gv-cat-1: var(--ads-primary-500);
+    --gv-cat-2: var(--ads-warning-400);
+    --gv-cat-3: var(--ads-tertiary-500);
+    --gv-cat-4: var(--ads-success-500);
+    --gv-cat-5: var(--ads-danger-500);
+    --gv-cat-6: var(--ads-util-focus);
+    --gv-cat-7: #7b4fd1;
+    --gv-cat-8: #e8590c;
+    --gv-cat-9: #9acd32;
+    --gv-cat-10: #17c3d1;
+    --gv-cat-11: #e052a8;
+    --gv-cat-12: #8c6239;
+    --gv-cat-13: #2f3fb5;
+    --gv-cat-14: #6b7a1f;
+    --gv-cat-15: #c9a7ee;
+    --gv-cat-16: #ff9e80;
+    --gv-cat-17: #4f6d7a;
+    --gv-cat-18: #7fd1a8;
+    --gv-cat-19: #8e1b3a;
+    --gv-cat-20: #f2c200;
+    --gv-cat-21: #1f5f2e;
+    --gv-cat-22: #84b6f4;
+    --gv-cat-23: #c15bd9;
 }
 
 *,

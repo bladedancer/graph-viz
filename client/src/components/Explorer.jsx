@@ -1,25 +1,15 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { api } from '../api.js';
 import { usePersistentState } from '../hooks/usePersistentState.js';
-import { GraphStore, applyFilter } from '../utils/graphStore.js';
+import { GraphStore, PALETTE_SLOTS, applyFilter } from '../utils/graphStore.js';
 import { EmptyState, StatusChip, Toast, Toolbar, ZoomControls } from './CanvasControls.jsx';
 import ControlsPanel from './ControlsPanel.jsx';
 import DetailsPanel from './DetailsPanel.jsx';
 import GraphCanvas from './GraphCanvas.jsx';
 import Header from './Header.jsx';
 
-// Categorical colors for the biggest groups, then one for everything else. All design-system tokens.
-const PALETTE_TOKENS = [
-    '--ads-primary-500',
-    '--ads-warning-400',
-    '--ads-tertiary-500',
-    '--ads-primary-100',
-    '--ads-warning-700',
-    '--ads-tertiary-200',
-    '--ads-success-500',
-    '--ads-util-focus',
-    '--ads-secondary-400',
-];
+// One color per legend slot (--gv-cat-N, defined in app.css), then a neutral design-system token for "other".
+const PALETTE_TOKENS = [...Array.from({ length: PALETTE_SLOTS }, (_, i) => `--gv-cat-${i + 1}`), '--ads-secondary-400'];
 const readPalette = () => PALETTE_TOKENS.map((t) => getComputedStyle(document.documentElement).getPropertyValue(t).trim());
 
 const IDLE = { status: 'idle', progress: null, error: null, summary: null };
